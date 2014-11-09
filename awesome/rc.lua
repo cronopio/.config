@@ -77,7 +77,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ "irc", "web", "jitsu", 4, 5, 6, 7, 8}, s, layouts[1])
+    tags[s] = awful.tag({ "irc", "web", "jitsu", "term", "media", "editor", "@", "@@"}, s, layouts[1])
 end
 -- }}}
 
@@ -145,7 +145,7 @@ membar:set_background_color(beautiful.fg_off_widget)
 vicious.register(membar, vicious.widgets.mem, "$1", 5)
 
 memtext = wibox.widget.textbox()
-vicious.register(memtext, vicious.widgets.mem, " $1%", 5)
+vicious.register(memtext, vicious.widgets.mem, " $1% $2 MB", 5)
 
 -- File System
 fsicon = wibox.widget.imagebox()
@@ -180,10 +180,10 @@ vicious.register(volbar,    vicious.widgets.volume,  "$1",  1, "Master")
 vicious.register(volwidget, vicious.widgets.volume, " $1% $2", 1, "Master")
 
 volbar:buttons(awful.util.table.join(
-   awful.button({ }, 1, function () awful.util.spawn("pavucontrol") end),
-   awful.button({ }, 3, function () awful.util.spawn("ponymix toggle", false) end),
-   awful.button({ }, 4, function () awful.util.spawn("ponymix increase 5", false) end),
-   awful.button({ }, 5, function () awful.util.spawn("ponymix decrease 5", false) end)
+   -- awful.button({ }, 1, function () awful.util.spawn("pavucontrol") end),
+   -- awful.button({ }, 3, function () awful.util.spawn("ponymix toggle", false) end),
+   awful.button({ }, 4, function () awful.util.spawn("amixer set Master playback 1%+", false) end),
+   awful.button({ }, 5, function () awful.util.spawn("amixer set Master playback 1%-", false) end)
 )) -- Register assigned buttons
 volwidget:buttons(volbar:buttons())
 
@@ -417,7 +417,19 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "F1", function () awful.util.spawn("firefox") end),
     awful.key({ }, "F2", function () awful.util.spawn("chromium") end),
     awful.key({ }, "F3", function () awful.util.spawn("skype") end),
-    awful.key({ }, "F4", function () awful.util.spawn("shutter") end)
+    awful.key({ }, "F4", function () awful.util.spawn("shutter") end),
+
+    -- Volume Control
+    awful.key({ "Control" }, "Up", function ()
+                                       awful.util.spawn("amixer set Master playback 1%+", false )
+                                       vicious.force({ volwidget })
+                                   end),
+    awful.key({ "Control" }, "Down", function ()
+                                       awful.util.spawn("amixer set Master playback 1%-", false )
+                                       vicious.force({ volwidget })
+                                     end)
+
+
 )
 
 clientkeys = awful.util.table.join(
@@ -506,7 +518,16 @@ awful.rules.rules = {
     { rule = { instance = "plugin-container" },
         properties = { floating = true } },
     { rule = { class = "gimp" },
-      properties = { floating = true } }
+      properties = { floating = true } },
+
+    { rule = { class = "Sublime_text" },
+          properties = { tag = tags[1][6] } },
+
+    { rule = { class = "Chromium" },
+          properties = { tag = tags[1][3]} },
+    { rule = { class = "Firefox" },
+          properties = { tag = tags[1][2]} },
+
 }
 -- }}}
 
