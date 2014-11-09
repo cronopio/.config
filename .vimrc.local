@@ -1,9 +1,15 @@
 " Color Customization
-colorscheme solarized
-set background="dark"
-let &colorcolumn=join(range(81,1900),",")
-highlight ColorColumn ctermbg=235 guibg=#2c2d27
-let &colorcolumn="80,".join(range(120,1900),",")
+" set background="dark"
+" colorscheme solarized
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set number
+set autoindent
+set mouse=a
+" let &colorcolumn="80,".join(range(81,1900),",")
+" highlight ColorColumn ctermbg=215 guibg=#3f3f3f
+" let &colorcolumn="80,".join(range(90,1900),",")
 
 " Arduino Syntax
 autocmd! BufNewFile,BufRead *.ino setlocal ft=c
@@ -35,3 +41,6 @@ function! AutoHighlightToggle()
     return 1
   endif
 endfunction
+
+filetype plugin indent on
+syntax on
