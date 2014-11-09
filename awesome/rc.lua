@@ -77,7 +77,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9}, s, layouts[1])
+    tags[s] = awful.tag({ 1, "web", "jitsu", 4, 5, 6, 7, 8, 9}, s, layouts[1])
 end
 -- }}}
 
@@ -412,12 +412,12 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift" }, "e", function () awful.util.spawn("setxkbmap -layout es") end),
 
     -- PrintScreen 
-    awful.key({ }, "Print", function () awful.util.spawn("scrot -e 'up $f && mv $f ~/Pictures/screenshots/ 2>/dev/null'") end),
+    -- awful.key({ }, "Print", function () awful.util.spawn("scrot -e 'up $f && mv $f ~/Pictures/screenshots/ 2>/dev/null'") end),
     -- Firefox
     awful.key({ }, "F1", function () awful.util.spawn("firefox") end),
     awful.key({ }, "F2", function () awful.util.spawn("chromium") end),
     awful.key({ }, "F3", function () awful.util.spawn("skype") end),
-    awful.key({ }, "F4", function () awful.util.spawn("shutter") end)
+    -- awful.key({ }, "F4", function () awful.util.spawn("shutter") end)
 )
 
 clientkeys = awful.util.table.join(
