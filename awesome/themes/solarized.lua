@@ -9,13 +9,13 @@
 -- {{{ Main
 local awful = require("awful")
 theme = {}
-theme.wallpaper = "~/Pictures/wallpapers/nodesource.png"
+theme.wallpaper = "~/wallpaper.jpg"
 theme.confdir       = awful.util.getdir("config")
 -- }}}
 
 
 -- {{{ Styles
-theme.font      = "Profont 9"
+theme.font      = "Profont 7"
 
 -- {{{ Colors
 theme.fg_normal = "#839596"

@@ -77,7 +77,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, "web", "jitsu", 4, 5, 6, 7, 8, 9}, s, layouts[1])
+    tags[s] = awful.tag({ "irc", "web", "jitsu", 4, 5, 6, 7, 8}, s, layouts[1])
 end
 -- }}}
 
@@ -192,7 +192,7 @@ wificon = wibox.widget.imagebox()
 wificon:set_image(beautiful.widget_wifi)
 wifiwidget = wibox.widget.textbox()
 
-vicious.register(wifiwidget, vicious.widgets.wifi, '${ssid} ${linp}%' , 3, "wlp2s0")
+vicious.register(wifiwidget, vicious.widgets.wifi, '${ssid} ${linp}%' , 3, "wlan0")
 
 wifiwidget:buttons(awful.util.table.join(
   awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e wicd-curses") end)
@@ -206,8 +206,8 @@ upicon:set_image(beautiful.widget_netup)
 netwidget = wibox.widget.textbox()
 
 vicious.register(netwidget, vicious.widgets.net, '<span color="'
-  .. beautiful.fg_netdn_widget ..'">${wlp2s0 down_kb}</span> <span color="'
-  .. beautiful.fg_netup_widget ..'">${wlp2s0 up_kb}</span>', 3)
+  .. beautiful.fg_netdn_widget ..'">${wlan0 down_kb}</span> <span color="'
+  .. beautiful.fg_netup_widget ..'">${wlan0 up_kb}</span>', 3)
 
 dateicon = wibox.widget.imagebox()
 dateicon:set_image(beautiful.widget_date)
@@ -417,7 +417,7 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "F1", function () awful.util.spawn("firefox") end),
     awful.key({ }, "F2", function () awful.util.spawn("chromium") end),
     awful.key({ }, "F3", function () awful.util.spawn("skype") end),
-    -- awful.key({ }, "F4", function () awful.util.spawn("shutter") end)
+    awful.key({ }, "F4", function () awful.util.spawn("shutter") end)
 )
 
 clientkeys = awful.util.table.join(
